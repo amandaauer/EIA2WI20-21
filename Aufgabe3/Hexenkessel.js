@@ -1,42 +1,75 @@
 "use strict";
-var L03_FormElements;
-(function (L03_FormElements) {
-    window.addEventListener("load", init);
-    function init(_event) {
-        console.log("Init");
-        let fieldsets = document.querySelectorAll("fieldset");
-        // Install listeners on fieldsets
-        for (let i = 0; i < fieldsets.length; i++) {
-            let fieldset = fieldsets[i];
-            fieldset.addEventListener("change", handleChange);
-            fieldset.addEventListener("input", handleChange);
+var LO3_PotionEditor;
+(function (LO3_PotionEditor) {
+    window.addEventListener("load", handleLoad);
+    function handleLoad(_event) {
+        document.getElementById("formDesc").addEventListener("change", handleDesc);
+        document.getElementById("ingredients").addEventListener("change", handleIngredients);
+    }
+    function handleDesc(_event) {
+        let formData = new FormData(document.forms[0]);
+        let description = document.getElementById("description");
+        description.innerHTML = "";
+        for (let entry of formData) {
+            description.innerHTML += entry[0] + ": " + entry[1] + "<br>";
         }
     }
-    function handleChange(_event) {
-        let target = _event.target;
-        console.log();
-        if (_event.type == "change")
-            console.warn("Change: " + target.name + " = " + target.value, _event);
-        else
-            console.log("Input: " + target.name + " = " + target.value, _event);
-        // Handling checkbox
-        if (target.type == "checkbox")
-            console.log("Checked: " + target.name + " = " + target.checked);
-        // Slider response
-        // if (target.name == "Slider") {
-        //     let progress: HTMLProgressElement = <HTMLProgressElement>document.getElementsByTagName("progress")[0];
-        //     progress.value = parseFloat(target.value);
-        // }
-        // Meter response
-        // if (target.name == "Stepper") {
-        //     let meter: HTMLMeterElement = <HTMLMeterElement>document.querySelector("meter");
-        //     meter.value = parseFloat(target.value);
-        // }
-        // Color response
-        // if (target.name == "Color") {
-        //     let ouput: HTMLOutputElement = <HTMLOutputElement>document.querySelector("output");
-        //     ouput.value = target.value;
-        // }
+    function handleIngredients(_event) {
+        let formData = new FormData(document.forms[1]);
+        let recipe = document.getElementById("recipe");
+        let ingredients = document.querySelectorAll(".ingredients");
+        let amounts = document.querySelectorAll(".amount");
+        let price = [];
+        let amount = [];
+        recipe.innerHTML = "";
+        for (let i = 0; i < ingredients.length; i++) {
+            if (ingredients[i].checked) {
+                price.push(Number(ingredients[i].getAttribute("price")));
+            }
+        }
+        for (let i = 0; i < amounts.length; i++) {
+            if (ingredients[i].checked) {
+                amount.push(Number(amounts[i].value));
+            }
+        }
+        for (let entry of formData) {
+            switch (String(entry[1])) {
+                case "spider":
+                    recipe.innerHTML += entry[0] + ": " + entry[1] + " price: " + price[0] + "<br>";
+                    break;
+                case "blood":
+                    recipe.innerHTML += entry[0] + ": " + entry[1] + " price: " + price[1] + "<br>";
+                    break;
+                case "fingernail":
+                    recipe.innerHTML += entry[0] + ": " + entry[1] + " price: " + price[2] + "<br>";
+                    break;
+                default:
+                    recipe.innerHTML += entry[0] + ": " + entry[1] + "<br>";
+                    break;
+            }
+        }
+        recipe.innerHTML += "<br>" + "<br>" + "Total: " + calculatePrice(price, amount);
     }
-})(L03_FormElements || (L03_FormElements = {}));
-//# sourceMappingURL=FormElements.js.map
+    function calculatePrice(_price, _amount) {
+        let totalPrice = 0;
+        for (let i = 0; i < _price.length; i++) {
+            totalPrice += _price[i] * _amount[i];
+        }
+        if (totalPrice < 29) {
+            return totalPrice + " Knut";
+        }
+        else if (totalPrice < 493) {
+            let sickel = totalPrice / 29;
+            let knut = totalPrice % 29;
+            return sickel.toFixed() + " Sickel," + knut.toFixed() + " Knut";
+        }
+        else {
+            let galleone = totalPrice / 493;
+            let rest = totalPrice % 493;
+            let sickel = rest / 29;
+            let knut = sickel % 29;
+            return galleone.toFixed() + " Galleonen, " + sickel.toFixed() + " Sickel, " + knut.toFixed() + " Knut";
+        }
+    }
+})(LO3_PotionEditor || (LO3_PotionEditor = {}));
+//# sourceMappingURL=Hexenkessel.js.map
