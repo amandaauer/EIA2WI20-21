@@ -12,7 +12,7 @@
 <body>
     <header>
         <h1>Potion-Editor</h1>
-        <p>Put in potion name, explanations & risks, choose kind of effect, select extras and amount, control temperature, choose stir
+        <p>Choose a name, risks, the kind of effect, select extras and amount, control temperature, choose stir
             intensity, duration , texture and color</p>
     </header>
 
@@ -23,38 +23,37 @@
 
             <fieldset id="Text1">
                 <legend> Name </legend>
-                <input type="text" name="Name" placeholder="put in potion name" required />
+                <input type="text" name="name" placeholder="choose a name" required />
 
             </fieldset>
 
 
             <fieldset id="Text2">
-                <legend> Explanations, risks & Co </legend>
-                <textarea name="Explanations" rows="2" placeholder="tell me more"></textarea>
+                <legend> Risks & Co </legend>
+                <textarea name="risks" rows="2" placeholder="tell me"></textarea>
 
             </fieldset>
 
 
             <fieldset>
                 <legend>Effect</legend>
-                <input type="radio" name="Effect" id="love" value="love" checked />
+                <input type="radio" name="effect" id="love" value="love" checked />
                 <label for="love">love</label>
                 <input type="radio" name="Effect" id="power" value="power" />
                 <label for="power">power</label>
-                <input type="radio" name="Effect" id="invisible" value="invisible" />
-                <label for="invisible">invisible</label>
-                <input type="radio" name="Effect" id="small" value="small" />
-                <label for="small">small</label>
+                <input type="radio" name="Effect" id="ill" value="ill" />
+                <label for="ill">invisible</label>
+                
             </fieldset>
 
 
             <fieldset>
-                <legend>Period</legend>
+                <legend>Lifetime</legend>
                 <span id="slider1">
                     <span>
-                        1h
-                        <input type="range" name="Period" id="period" min="1" max="24" step="1" value="1">
-                        24h
+                        1hour
+                        <input type="range" name="Lifetime" id="period" min="1" max="24" step="1" value="1">
+                        24hours
                     </span>
                 </span>
             </fieldset>
@@ -66,19 +65,19 @@
         <div id="ingredients">
 
             <fieldset>
-                <legend>Extras</legend>
-                <input type="checkbox" name="Extra" class="ingredients" id="spider" value="spider" price="100">
-                <label for="spider">spider-legs:</label>
+                <legend>ingredients</legend>
+                <input type="checkbox" name="ingredients" class="ingredients" id="blood" value="blood" price="150">
+                <label for="blood">blood</label>
 
                 <input type="number" name="Amount" class="amount" step="1" min="0" max="10" value="0" />
 
-                <input type="checkbox" name="Extra" class="ingredients" id="blood" value="blood" price="300">
-                <label for="blood">blood (ml):</label>
+                <input type="checkbox" name="ingredients" class="ingredients" id="spiderleg" value="spiderleg" price="200">
+                <label for="spiderleg">spiderleg</label>
 
                 <input type="number" name="Amount" class="amount" step="1" min="0" max="10" value="0" />
 
-                <input type="checkbox" name="Extra" class="ingredients" id="fingernail" value="fingernail" price="12">
-                <label for="fingernail">fingernail/s:</label>
+                <input type="checkbox" name="ingredients" class="ingredients" id="hair" value="hair" price="150">
+                <label for="hair">hair</label>
 
                 <input type="number" name="Amount" class="amount" step="1" min="0" max="10" value="0" />
 
@@ -90,10 +89,10 @@
                 <legend>Temperature</legend>
                 <span id="slider2">
                     <span>
-                        100°C
-                        <input type="range" name="Temperature" id="temperature" min="100" max="1000" step="100"
+                        -10G°C
+                        <input type="range" name="Temperature" id="temperature" min="-10" max="100" step="10"
                             value="100">
-                        1000°C
+                        100°C
                     </span>
                 </span>
             </fieldset>
@@ -125,13 +124,13 @@
 
             </fieldset>
 
-            <fieldset id="texture">
-                <legend>Texture</legend>
-                <input type="radio" name="Texture" id="tough" value="tough" checked />
+            <fieldset id="consistency">
+                <legend>Consistency</legend>
+                <input type="radio" name="consistency" id="tough" value="tough"  />
                 <label for="tough">tough</label>
-                <input type="radio" name="Texture" id="liquid" value="liquid" />
+                <input type="radio" name="consistency" id="liquid" value="liquid" />
                 <label for="liquid">liquid</label>
-                <input type="radio" name="Texture" id="slimy" value="slimy" />
+                <input type="radio" name="consistency" id="slimy" value="slimy" />
                 <label for="slimy">slimy</label>
             </fieldset>
 
@@ -146,10 +145,10 @@
     </form>
 
     <div id="bill">
-        <h2>Your recipe</h2>
+        <h2>Your potion-recipe</h2>
         <div id="description"></div>
         <div id="recipe"></div>
-        <h3>Thank you. See you soon!</h3>
+        <h3>Thanks for your potion-recipe</h3>
     </div>
 </body>
 

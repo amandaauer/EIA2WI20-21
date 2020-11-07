@@ -1,11 +1,11 @@
 body {
 	display: grid;
-	grid-template-columns: 50% auto;
+	grid-template-columns: 65% auto;
 	grid-template-rows: auto auto;
     background-color: rgb(31, 126, 163);
-    color: white;
+    color: black;
     font-size: 15px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Arial', 'Arial Narrow', Arial, sans-serif;
 }
 
 
@@ -15,12 +15,13 @@ header {
 }
 
 #form {
-	border: solid white;
+	border: solid black;
 	margin: 1em;
 }
 
 h2 {
 	text-align: center;
+	color:lightblue ;
 }
 
 #slider {
