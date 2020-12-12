@@ -1,11 +1,4 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+"use strict";
 var L06_Hexenkessel_No4;
 (function (L06_Hexenkessel_No4) {
     let ingredients = "";
@@ -18,28 +11,26 @@ var L06_Hexenkessel_No4;
     let amounts = [];
     window.addEventListener("load", handleLoad);
     let url = "https://potioneditor.herokuapp.com";
-    function handleLoad(_event) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let response = yield fetch("data.json");
-            let offer = yield response.text();
-            let data = JSON.parse(offer);
-            let secResponse = yield fetch("priceData.json");
-            let secOffer = yield secResponse.text();
-            let priceData = JSON.parse(secOffer);
-            L06_Hexenkessel_No4.generateContent(data);
-            L06_Hexenkessel_No4.generatePriceContent(priceData);
-            let submit = document.querySelector("button[type=button]");
-            console.log(submit);
-            let showAll = document.getElementById("showAll");
-            document.querySelector("div#formDesc").addEventListener("change", addDescription);
-            document.querySelector("div#ingredients").addEventListener("change", addIngredients);
-            document.querySelector("div#instructions").addEventListener("change", addInstruction);
-            document.querySelector("div#secInstructions").addEventListener("change", addSecInstruction);
-            document.querySelector("div#amount").addEventListener("change", addIngredients);
-            document.getElementById("resetOrder").addEventListener("click", resetRecipe);
-            showAll.addEventListener("click", addRecipe);
-            submit.addEventListener("click", sendOrder);
-        });
+    async function handleLoad(_event) {
+        let response = await fetch("data.json");
+        let offer = await response.text();
+        let data = JSON.parse(offer);
+        let secResponse = await fetch("priceData.json");
+        let secOffer = await secResponse.text();
+        let priceData = JSON.parse(secOffer);
+        L06_Hexenkessel_No4.generateContent(data);
+        L06_Hexenkessel_No4.generatePriceContent(priceData);
+        let submit = document.querySelector("button[type=button]");
+        console.log(submit);
+        let showAll = document.getElementById("showAll");
+        document.querySelector("div#formDesc").addEventListener("change", addDescription);
+        document.querySelector("div#ingredients").addEventListener("change", addIngredients);
+        document.querySelector("div#instructions").addEventListener("change", addInstruction);
+        document.querySelector("div#secInstructions").addEventListener("change", addSecInstruction);
+        document.querySelector("div#amount").addEventListener("change", addIngredients);
+        document.getElementById("resetOrder").addEventListener("click", resetRecipe);
+        showAll.addEventListener("click", addRecipe);
+        submit.addEventListener("click", sendOrder);
     }
     function resetRecipe() {
         document.getElementById("basics").reset();
@@ -51,16 +42,14 @@ var L06_Hexenkessel_No4;
         document.getElementById("showDesc").innerHTML = "";
         document.getElementById("displayPrice").innerHTML = "";
     }
-    function sendOrder(_event) {
-        return __awaiter(this, void 0, void 0, function* () {
-            console.log("Send order");
-            let form = new FormData(document.forms[0]);
-            let query = new URLSearchParams(form);
-            let record = addRec.split("<br>").join("->").split("#").join("%23");
-            let response = yield fetch(url + "?" + query.toString() + "&" + "instructions=" + record + "&" + "total=" + calculatePrice(price, amounts));
-            let responseText = yield response.text();
-            alert(responseText);
-        });
+    async function sendOrder(_event) {
+        console.log("Send order");
+        let form = new FormData(document.forms[0]);
+        let query = new URLSearchParams(form);
+        let record = addRec.split("<br>").join("->").split("#").join("%23");
+        let response = await fetch(url + "?" + query.toString() + "&" + "instructions=" + record + "&" + "total=" + calculatePrice(price, amounts));
+        let responseText = await response.text();
+        alert(responseText);
     }
     function addIngredients() {
         if (check.some(elem => elem === 1)) { }

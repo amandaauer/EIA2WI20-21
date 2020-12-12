@@ -1,3 +1,4 @@
+"use strict";
 var L06_Hexenkessel_No4;
 (function (L06_Hexenkessel_No4) {
     function generateContent(_data) {
